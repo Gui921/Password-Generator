@@ -1,6 +1,5 @@
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
-//output.innerHTML = slider.value;
 
 
 slider.oninput = function () {
@@ -9,26 +8,32 @@ slider.oninput = function () {
 
 function makeid(length) {
     var result = '';
-    var characters = 'abcdefghijklmnopqrstuvwxyz';
-    const cl = document.getElementById('Cletters');
-    const nm = document.getElementById('numbers');
-    const sy = document.getElementById('symbols');
-    if(cl.checked){
-        characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var char = 'abcdefghijklmnopqrstuvwxyz';
+
+    if(document.getElementById('Cletters').checked){
+        char += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     }
-    if(nm.checked){
-        characters += '0123456789';
+    if(document.getElementById('numbers').checked){
+        char += '0123456789';
     }
-    if(sy.checked){
-        characters += '\|!#$%&/()=?»*+<>';
+    if(document.getElementById('symbols').checked){
+        char += '\|!#$%&/()=?»*+<>';
     }
-    var charactersLength = characters.length;
+    
     for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += char.charAt(Math.floor(Math.random() * char.length));
     }
     return result;
 }
 
 function button() {
     document.getElementById("fname").value = makeid(slider.value);
+}
+
+function copy(){
+var copyText = document.getElementById("fname");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
 }
